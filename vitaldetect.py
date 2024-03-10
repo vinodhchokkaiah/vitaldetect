@@ -22,6 +22,13 @@
 
 import streamlit as st
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+# Access the secret key
+NVIDIA_API_KEY = st.secrets["NVIDIA_API_KEY"]
 
 st.set_page_config(layout = "wide")
 
