@@ -1,4 +1,4 @@
-dotenv
+python-dotenv
 streamlit==1.30.0
 langchain-nvidia-ai-endpoints==0.0.1
 faiss-cpu==1.7.4
