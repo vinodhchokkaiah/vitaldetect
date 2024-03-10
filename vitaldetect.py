@@ -28,7 +28,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Access the secret key
-NVIDIA_API_KEY = st.secrets["NVIDIA_API_KEY"]
+#NVIDIA_API_KEY = st.secrets["NVIDIA_API_KEY"]
 
 st.set_page_config(layout = "wide")
 
