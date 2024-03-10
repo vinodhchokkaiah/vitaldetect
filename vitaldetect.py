@@ -19,16 +19,8 @@
 ############################################
 # Component #1 - Document Loader
 ############################################
-
 import streamlit as st
 import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env
-load_dotenv()
-
-# Access the secret key
-#NVIDIA_API_KEY = st.secrets["NVIDIA_API_KEY"]
 
 st.set_page_config(layout = "wide")
 
@@ -53,7 +45,6 @@ with st.sidebar:
 
 from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
-
 # make sure to export your NVIDIA AI Playground key as NVIDIA_API_KEY!
 llm = ChatNVIDIA(model="mixtral_8x7b")
 document_embedder = NVIDIAEmbeddings(model="nvolveqa_40k", model_type="passage")
@@ -75,9 +66,13 @@ with st.sidebar:
 # Path to the vector store file
 vector_store_path = "vectorstore.pkl"
 
-# Load raw documents from the directory
-raw_documents = DirectoryLoader(DOCS_DIR).load()
+from unstructured.partition.auto import partition
 
+try:
+# Load raw documents from the directory
+   raw_documents = DirectoryLoader(DOCS_DIR).load()
+except Exception as e:
+    print(f"-----Exception: {e}")
 
 # Check for existing vector store file
 vector_store_exists = os.path.exists(vector_store_path)
@@ -152,4 +147,4 @@ if user_input and vectorstore!=None:
         message_placeholder.markdown(full_response)
     st.session_state.messages.append({"role": "assistant", "content": full_response})
     
-    
+            
